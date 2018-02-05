@@ -1,0 +1,32 @@
+import Commandos.*
+describe "Commandos"{
+	var escorpion1 = new Escorpion(4,[],40,[],[])
+	var escorpion2 = new Escorpion(1,[],205,[],[])
+	var gaviota1 = new Gaviota(4,["disuasion","patrullajeBosques"],14,[],[])
+	var gaviota2 = new Escorpion(2,[],300,[],[])
+	var grupo = new Grupo(4,[])
+	var corteDeRuta = new CorteDeRuta(2)
+	var academia		
+	
+	fixture{
+		grupo.entrarUniformado(gaviota1)
+		grupo.entrarUniformado(escorpion2)
+		grupo.entrarUniformado(gaviota2)
+		academia.asignarTeniente(escorpion1)
+		academia.asignarCategoria(gaviota1)
+		academia.asignarCategoria(gaviota2)
+		academia.asignarCategoria(escorpion1)
+		academia.asignarCategoria(escorpion2)
+	}
+	
+	test "validarIntegrar"{
+		assert.notThat(grupo.puedeEntrar(escorpion1))
+	}
+	test "conflicto"{
+		grupo.intervenir(corteDeRuta)
+		assert.equals(4,escorpion2.denuncias())
+	}
+	test "validarcategoria"{
+		assert.notThat(academia.categoriaCorrecta(escorpion1,chuckNorris))
+	}
+}
